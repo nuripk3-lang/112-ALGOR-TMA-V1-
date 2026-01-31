@@ -2788,8 +2788,9 @@ function openVideoPlayer(videoUrl, videoBaslik) {
                             </div>
                         </div>
                     </div>
-                    <video id="mainVideo" controls preload="metadata" style="width:100%; border-radius:12px; border:1px solid #444; background:#000;" onloadstart="showVideoLoader()" oncanplay="hideVideoLoader()">
+                    <video id="mainVideo" controls playsinline webkit-playsinline x-webkit-airplay="allow" preload="metadata" style="width:100%; border-radius:12px; border:1px solid #444; background:#000;" onloadstart="showVideoLoader()" oncanplay="hideVideoLoader()">
                         <source src="${videoUrl}" type="video/mp4">
+                        <source src="${videoUrl}" type="video/webm">
                         Tarayıcınız video oynatmayı desteklemiyor.
                     </video>
                 </div>
@@ -2821,16 +2822,50 @@ function openVideoPlayer(videoUrl, videoBaslik) {
         document.body.appendChild(modal);
         modal.onclick = (e) => { if(e.target === modal) modal.remove(); };
         
-        // Video yükleme hatası kontrolü
+        // Video yükleme hatası kontrolü ve mobil uyumluluk
         const video = modal.querySelector('video');
         if (video) {
+            // Mobil için ek ayarlar
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+            video.setAttribute('x-webkit-airplay', 'allow');
+            
+            // Video yükleme durumu
+            video.addEventListener('loadedmetadata', function() {
+                console.log('Video metadata yüklendi:', videoUrl);
+                hideVideoLoader();
+            });
+            
+            video.addEventListener('loadeddata', function() {
+                console.log('Video data yüklendi:', videoUrl);
+            });
+            
+            video.addEventListener('canplay', function() {
+                console.log('Video oynatılabilir:', videoUrl);
+                hideVideoLoader();
+            });
+            
             video.addEventListener('error', function(e) {
-                console.error('Video yükleme hatası:', videoUrl);
+                console.error('Video yükleme hatası:', videoUrl, e);
+                hideVideoLoader();
                 const errorDiv = document.createElement('div');
                 errorDiv.style.cssText = "color:white; text-align:center; padding:20px; background:rgba(220,38,38,0.8); border-radius:8px; margin-top:10px;";
-                errorDiv.textContent = 'Video yüklenemedi. Dosya mevcut değil olabilir.';
+                errorDiv.innerHTML = `
+                    <div style="font-size: 24px; margin-bottom: 10px;">❌</div>
+                    <div style="font-weight: 600; margin-bottom: 5px;">Video yüklenemedi</div>
+                    <div style="font-size: 13px; opacity: 0.9;">Dosya: ${videoUrl}</div>
+                    <div style="font-size: 12px; margin-top: 8px; opacity: 0.8;">
+                        Olası nedenler:<br>
+                        • Dosya mevcut değil<br>
+                        • İnternet bağlantısı yavaş<br>
+                        • Video formatı desteklenmiyor
+                    </div>
+                `;
                 video.parentElement.appendChild(errorDiv);
             });
+            
+            // Manuel yükleme tetikle
+            video.load();
         }
         
         // Resim yükleme fonksiyonları

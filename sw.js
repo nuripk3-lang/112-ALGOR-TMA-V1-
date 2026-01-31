@@ -1,4 +1,4 @@
-const CACHE_NAME = '112-asistan-v36-css-clean';
+const CACHE_NAME = '112-asistan-v39-voice-mobile-fix';
 const urlsToCache = [
   './',
   './index.html',
