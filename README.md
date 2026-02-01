@@ -165,4 +165,8 @@ Kırklareli 112 Acil Sağlık Hizmetleri
 
 ---
 
-**© 2026 Hastane Öncesi Bakım Kılavuzu**  
+**© 2026 Hastane Öncesi Bakım Kılavuzu**
+
+---
+
+*Son güncelleme: 2026*
