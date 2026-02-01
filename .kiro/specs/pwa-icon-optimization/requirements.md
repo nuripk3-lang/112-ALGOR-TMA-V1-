@@ -73,3 +73,7 @@ PWA (Progressive Web App) projemizde mobil cihazlarda "Ana ekrana ekle" Ã¶zelliÄ
 3. THE HTML SHALL include Microsoft tile configuration for Windows
 4. THE HTML SHALL maintain existing PWA meta tags
 5. THE HTML SHALL reference icon files with correct paths and attributes
+
+
+---
+*Last updated: 2026*
