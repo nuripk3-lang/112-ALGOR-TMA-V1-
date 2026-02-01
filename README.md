@@ -169,4 +169,4 @@ Kırklareli 112 Acil Sağlık Hizmetleri
 
 ---
 
-*Son güncelleme: 2026*
+*Son güncelleme: 2026 - PWA Full Offline v40*
