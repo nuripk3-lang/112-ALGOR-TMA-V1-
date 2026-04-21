@@ -1996,6 +1996,16 @@ function showGroup(g) {
   }
   
   clearContent();
+
+  // Açılan bölüme smooth scroll
+  const sectionId = g === 'yetiskin' ? 'yetiskin' : g === 'cocuk' ? 'cocuk' : g === 'doz' ? 'cocukDozSection' : 'ilacTabloSection';
+  setTimeout(function() {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 20;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  }, 50);
 }
 
 // --- CPR Sayacı ve Ses Mantığı (TAMİR EDİLDİ) ---
@@ -2429,6 +2439,10 @@ function showQuizGame() {
     
     contentEl.style.display = "block";
     loadLeaderboard();
+    setTimeout(function() {
+        const top = contentEl.getBoundingClientRect().top + window.pageYOffset - 20;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 50);
 }
 
 function startQuiz(level) {
@@ -2925,7 +2939,10 @@ function showProcedures() {
     
     contentEl.innerHTML = html;
     contentEl.style.display = 'block';
-    window.scrollTo(0, 0);
+    setTimeout(function() {
+        const top = contentEl.getBoundingClientRect().top + window.pageYOffset - 20;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 50);
 }
 
 function calculatePediatric() {
@@ -3094,7 +3111,10 @@ function showChildCalc() {
         </div>
     `;
     contentEl.style.display = 'block';
-    window.scrollTo(0, 0);
+    setTimeout(function() {
+        const top = contentEl.getBoundingClientRect().top + window.pageYOffset - 20;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 50);
     
     // JavaScript ile direkt elementlere de stil uygula (cache bypass)
     setTimeout(() => {
