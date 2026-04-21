@@ -1,4 +1,4 @@
-const CACHE_NAME = '112-asistan-v40-full-offline';
+const CACHE_NAME = '112-asistan-v41-full-offline';
 const urlsToCache = [
   './',
   './index.html',
